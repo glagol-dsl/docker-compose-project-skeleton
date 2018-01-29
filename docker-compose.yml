@@ -26,12 +26,11 @@ services:
       - ./database:/docker-entrypoint-initdb.d
 
   composer:
-    image: composer:1.5
-    entrypoint: ""
+    image: glagol/php:7.1-fpm-alpine-dev
     command: /scripts/composer.sh
     volumes:
       - ./scripts/:/scripts
-      - ./out/:/app
+      - ./out/:/var/www/html
       - .composer/:/tmp
 
   nginx:
