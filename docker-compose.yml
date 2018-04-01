@@ -1,10 +1,9 @@
 version: '3'
 services:
-  php:
-    image: glagol/php:7.1-fpm-alpine-dev
+  app:
+    image: glagol/php:7.1-apache-dev
     volumes:
       - ./out/:/var/www/html
-      - ./config/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
     environment:
       - APP_NAME=Glagol DSL Sandbox
       - APP_ENV=local
@@ -14,6 +13,8 @@ services:
       - DB_PASSWORD=123
     links:
       - mysql
+    ports:
+      - '8081:80'
 
   mysql:
     image: mysql:5.7
@@ -24,20 +25,3 @@ services:
       - MYSQL_ROOT_PASSWORD=123
     volumes:
       - ./database:/docker-entrypoint-initdb.d
-
-  composer:
-    image: glagol/php:7.1-fpm-alpine-dev
-    command: /scripts/composer.sh
-    volumes:
-      - ./scripts/:/scripts
-      - ./out/:/var/www/html
-      - .composer/:/tmp
-
-  nginx:
-    image: nginx:1.13
-    ports:
-      - "8081:80"
-    volumes:
-      - ./config/site.conf:/etc/nginx/conf.d/default.conf
-    links:
-      - php
