@@ -15,6 +15,8 @@ services:
       - mysql
     ports:
       - '8081:80'
+    tmpfs:
+      - /var/www/html/storage/proxies:rw,noexec,nosuid
 
   mysql:
     image: mysql:5.7
