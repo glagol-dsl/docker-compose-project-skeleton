@@ -11,12 +11,13 @@ services:
       - APP_LOG_LEVEL=debug
       - DB_HOST=mysql
       - DB_PASSWORD=123
+      - DOCTRINE_PROXY_PATH=/doctrine_proxies.d
     links:
       - mysql
     ports:
       - '8081:80'
     tmpfs:
-      - /var/www/html/storage/proxies:rw,noexec,nosuid
+      - /doctrine_proxies.d:rw,noexec,nosuid
 
   mysql:
     image: mysql:5.7
