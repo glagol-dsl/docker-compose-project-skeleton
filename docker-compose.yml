@@ -17,7 +17,7 @@ services:
     ports:
       - '8081:80'
     tmpfs:
-      - /doctrine_proxies.d:rw,noexec,nosuid
+      - /doctrine_proxies.d:rw,noexec,nosuid,mode=777
 
   mysql:
     image: mysql:5.7
