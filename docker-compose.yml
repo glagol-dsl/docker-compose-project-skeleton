@@ -4,6 +4,7 @@ services:
     image: glagol/php:7.1-apache-dev
     volumes:
       - ./out/:/var/www/html
+      - ./.composer_cache:/root/.composer/cache
     environment:
       - APP_NAME=Glagol DSL Sandbox
       - APP_ENV=local
